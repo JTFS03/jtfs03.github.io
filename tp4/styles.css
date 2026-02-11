@@ -1,0 +1,25 @@
+/* styles for TP4 t-t-t project */
+
+:root{
+    --GameBoardSize: 80vh;
+    --GameBoardSpacer: 15px;
+}
+
+#GameBoard{
+    position: relative;
+    width: var(--GameBoardSize);
+    height: var(--GameBoardSize);
+    background-color: black;
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: var(--GameBoardSpacer);
+
+}
+
+.GameSpace{
+    position: relative;    
+    background-color: white;
+
+}
