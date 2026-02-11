@@ -2,7 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap');
 
-
+body{
+    background-color: crimson;
+}
 :root{
     --GameBoardSize: 90vmin;
     --GameBoardSpacer: 15px;
@@ -12,7 +14,7 @@
     position: absolute;
     width: var(--GameBoardSize);
     height: var(--GameBoardSize);
-    background-color: black;
+    background-color: transparent;
 
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -22,12 +24,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-
 }
 
 .GameSpace{
     position: relative;    
-    background-color: white;
+    background-color: gray;
     font-size: 12vh;
     text-transform: uppercase;
     text-align: center;
