@@ -4,11 +4,21 @@ body {
     text-align: center;
     background-color: lightblue;
 
-    background-image: url("clouds.jpg");
+    background-image: url("../images/cloud.jpg");
+
     background-repeat: no-repeat;
-    background-size: 100% 33vh;
+    background-size: cover;
     background-position: top center;
 }
+
+.cloud-banner {
+    height: 5vh;
+    background-image: url("../images/cloud.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+}
+
 /* Main weather container */
 .weather-card {
     margin-top: 40px;
