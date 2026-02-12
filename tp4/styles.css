@@ -14,7 +14,6 @@ body{
     position: absolute;
     width: var(--GameBoardSize);
     height: var(--GameBoardSize);
-    background-color: transparent;
 
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
