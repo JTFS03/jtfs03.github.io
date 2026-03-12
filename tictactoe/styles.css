@@ -1,0 +1,40 @@
+/* styles for TP4 t-t-t project */
+
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap');
+
+body{
+    background-color: crimson;
+}
+:root{
+    --GameBoardSize: 90vmin;
+    --GameBoardSpacer: 15px;
+}
+
+#GameBoard{
+    position: absolute;
+    width: var(--GameBoardSize);
+    height: var(--GameBoardSize);
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: var(--GameBoardSpacer);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.GameSpace{
+    position: relative;    
+    background-color: gray;
+    font-size: 12vh;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gravitas One', cursive;
+    overflow: hidden;
+
+}
