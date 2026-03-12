@@ -11,10 +11,63 @@ let gameboard = [
 ];
 
 
+// add click event to each space
+for (let i = 0; i < spaces.length; i++) {
 
+  spaces[i].addEventListener("click", function(){
+
+    // stop if space already used
+    if(gameboard[i] !== ""){
+      return;
+    }
+
+    // stop if game already finished
+    if(winnerText.innerHTML !== ""){
+      return;
+    }
+
+    // place symbol
+    spaces[i].innerHTML = currentPlayer;
+    gameboard[i] = currentPlayer;
+
+    // check for winner
+    let winState = checkGameboard(gameboard);
+
+    if(winState === "X"){
+      winnerText.innerHTML = "Player X Wins!";
+      return;
+    }
+
+    if(winState === "O"){
+      winnerText.innerHTML = "Player O Wins!";
+      return;
+    }
+
+    // check for draw
+    if(!gameboard.includes("")){
+      winnerText.innerHTML = "It's a Draw!";
+      return;
+    }
+
+    // switch player
+    if(currentPlayer === "X"){
+      currentPlayer = "O";
+    } else {
+      currentPlayer = "X";
+    }
+
+    turnDisplay.innerHTML = "Turn: Player " + currentPlayer;
+
+  });
+
+}
+
+
+
+// function to check rows, columns, diagonals
 function checkGameboard(board){
 
-  // convert board to rows like codepen
+  // convert board into rows
   let rowA = [board[0], board[1], board[2]];
   let rowB = [board[3], board[4], board[5]];
   let rowC = [board[6], board[7], board[8]];
