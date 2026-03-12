@@ -1,12 +1,14 @@
+const spaces = document.querySelectorAll(".GameSpace");
+const turnDisplay = document.querySelector("#turn");
+const winnerText = document.querySelector("#winner");
 
-
+let currentPlayer = "X";
 
 let gameboard = [
  "", "", "",
  "", "", "",
  "", "", ""
 ];
-
 
 
 
