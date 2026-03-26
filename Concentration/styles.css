@@ -43,16 +43,14 @@
   
 }
 
-
-
-/* Hover fade in/fade out */
-.card:hover .cardTop {
-  transition: opacity 0.3s ease;
+.card.flipped .cardTop {
   opacity: 0;
-}
-.card:hover .cardBottom {
   transition: opacity 0.3s ease;
+}
+
+.card.flipped .cardBottom {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 /* COLORS FOR EACH PAIR */
