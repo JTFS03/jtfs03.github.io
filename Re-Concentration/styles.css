@@ -1,0 +1,66 @@
+/* GAME BOARD */
+#GameBoard {
+  width: 880px;       /* 4 cards per row * (200px card width + 10px margin) */
+  margin: 40px auto;
+}
+
+/* CARD */
+.card {
+  width: 200px;
+  height: 200px;
+  float: left;    /* allows cards to be placed side by side */
+  margin: 10px;
+  position: relative;
+}
+
+/* FRONT AND BACK */
+.cardTop,
+.cardBottom {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 2px solid black;
+
+  display: flex; /* centers content both horizontally and vertically */
+  justify-content: center; /* centers content horizontally */
+  align-items: center;
+
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;   
+}
+
+/* FRONT */
+.cardTop {
+  background-color: black;
+  color: white; /*font color for the front of the card*/
+  opacity: 1;
+}
+/* BACK */
+.cardBottom {
+  opacity: 0;
+  
+}
+
+
+
+/* Hover fade in/fade out */
+.card:hover .cardTop {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.card:hover .cardBottom {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+/* COLORS FOR EACH PAIR */
+.pair1 .cardBottom { background-color: red; }
+.pair2 .cardBottom { background-color: orange; }
+.pair3 .cardBottom { background-color: yellow; }
+.pair4 .cardBottom { background-color: green; }
+.pair5 .cardBottom { background-color: teal; }
+.pair6 .cardBottom { background-color: blue; }
+.pair7 .cardBottom { background-color: purple; }
+.pair8 .cardBottom { background-color: pink; }
