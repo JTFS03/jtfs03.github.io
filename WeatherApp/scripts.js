@@ -9,8 +9,6 @@ const locationInput = document.getElementById("locationInput")
 
 function getWeather(location){
 
-console.log("Fetching weather for:", location)
-
 const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&days=3`
 
 fetch(url, {
@@ -18,7 +16,7 @@ method: "GET",
 headers: {
 "Content-Type": "application/json",
 "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
-"x-rapidapi-key": "YOUR_KEY"
+"x-rapidapi-key": "e2cb1235c3msh4ceaf1e9a863bbbp16e492jsnb7dcdedc1980"
 }
 })
 .then(response => response.json())
@@ -55,6 +53,18 @@ getWeather("Pullman")
 
 changeLocation.addEventListener("click", function(){
 modal.style.display = "flex"
+})
+
+submitLocation.addEventListener("click", function(){
+
+let newLocation = locationInput.value
+
+getWeather(newLocation)
+
+modal.style.display = "none"
+
+locationInput.value = ""
+
 })
 
 })
