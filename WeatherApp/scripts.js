@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 const city = document.getElementById("city")
 
+const changeLocation = document.getElementById("changeLocation")
+const modal = document.getElementById("modal")
+const submitLocation = document.getElementById("submitLocation")
+const locationInput = document.getElementById("locationInput")
+
 function getWeather(location){
 
 console.log("Fetching weather for:", location)
@@ -13,13 +18,11 @@ method: "GET",
 headers: {
 "Content-Type": "application/json",
 "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
-"x-rapidapi-key": "e2cb1235c3msh4ceaf1e9a863bbbp16e492jsnb7dcdedc1980"
+"x-rapidapi-key": "YOUR_KEY"
 }
 })
 .then(response => response.json())
 .then(data => {
-
-console.log(data)
 
 if(!data.location) return
 
@@ -40,10 +43,18 @@ document.getElementById(`high${i}`).textContent =
 
 document.getElementById(`low${i}`).textContent =
 "Low: " + day.day.mintemp_f + "°"
+
 })
+
 })
 .catch(error => console.log(error))
+
 }
 
 getWeather("Pullman")
+
+changeLocation.addEventListener("click", function(){
+modal.style.display = "flex"
+})
+
 })
