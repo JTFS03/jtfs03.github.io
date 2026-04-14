@@ -1,4 +1,4 @@
-/* colorback and text*/
+/* Page background and base text styling */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -6,24 +6,24 @@ body {
     background-color: lightblue;
 }
 
-/* Large city title at top */
+/* Large city title */
 .city {
     font-size: 60px;
     margin-top: 40px;
 }
 
-/* Center container and limit width */
+/* Centered weather container */
 .weather-container {
     width: 320px;
     margin: 40px auto;
 }
 
-/* Hide checkboxes so only labels are visible */
+/* Hide checkbox inputs */
 input[type="checkbox"] {
     display: none;
 }
 
-/* Style clickable day headers */
+/* Clickable day card */
 .day-label {
     display: block;
     background: white;
@@ -34,7 +34,7 @@ input[type="checkbox"] {
     font-weight: bold;
 }
 
-/* Hide weather details by default */
+/* Hidden weather details */
 .weather-info {
     display: none;
     background: #f3f3f3;
@@ -43,14 +43,61 @@ input[type="checkbox"] {
     margin-bottom: 10px;
 }
 
-/* Show weather details when corresponding checkbox is checked */
+/* Show details when selected */
 input[type="checkbox"]:checked + .day-label + .weather-info {
     display: block;
 }
 
-/* temperature styling */
+/* Temperature display */
 .temp {
     font-size: 50px;
     font-weight: bold;
 }
 
+/* Modal background overlay */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Modal content box */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 280px;
+}
+
+/* Modal title */
+.modal-content h3 {
+    margin: 0 0 16px;
+    font-size: 20px;
+}
+
+/* Modal input field */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+/* Modal button */
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background: lightblue;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
