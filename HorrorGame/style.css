@@ -1,13 +1,28 @@
-body {
-  color: white;
-  margin: 0;
+/* Start screen title */
+#start-screen h1 {
+  color: red;
+  text-shadow: 0 0 10px red;
 }
 
-/* dark overlay so text is readable */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: darkred;
-  z-index: -1;
+/* Result title */
+#result-title {
+  color: red;
+  text-shadow: 0 0 10px red;
+}
+
+/* Question text */
+#question {
+  color: red;
+  text-shadow: 0 0 10px red;
+}
+
+/* Answer buttons */
+#answer-buttons button {
+  background-color: darkred;
+  color: white;
+}
+
+/* Hover effect (important) */
+#answer-buttons button:hover {
+  background-color: red;
 }

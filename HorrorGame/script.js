@@ -19,7 +19,7 @@ const restartBtn = document.getElementById("restart-btn")
 const questions = [
   {
     question: "You notice someone watching you from a distance. What do you do?",
-    image: "images/woods.webp",
+    image: "Images/woods.webp",
     answers: [
       { text: "Approach them", villain: "Jason" },
       { text: "Watch back", villain: "Michael" },
@@ -29,7 +29,7 @@ const questions = [
   },
   {
     question: "You prefer situations where you have:",
-    image: "images/face.jpg",
+    image: "Images/face.jpg",
     answers: [
       { text: "Physical control", villain: "Jason" },
       { text: "Time and patience", villain: "Michael" },
@@ -39,7 +39,7 @@ const questions = [
   },
   {
     question: "How do you handle pressure?",
-    image: "images/eyes.png",
+    image: "Images/eyes.png",
     answers: [
       { text: "Push through", villain: "Jason" },
       { text: "Stay calm", villain: "Michael" },
@@ -49,7 +49,7 @@ const questions = [
   },
   {
     question: "What kind of presence do you have?",
-    image: "images/creepy.jpg",
+    image: "Images/creepy.jpg",
     answers: [
       { text: "Overwhelming", villain: "Leatherface" },
       { text: "Quiet", villain: "Freddy" },
