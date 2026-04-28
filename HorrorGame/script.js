@@ -11,29 +11,63 @@ const answerButtons = document.getElementById("answer-buttons")
 const resultContainer = document.getElementById("result-container")
 const resultTitle = document.getElementById("result-title")
 
+const restartBtn = document.getElementById("restart-btn")
+
 // ==========================
-// DATA (VERY SIMPLE)
+// DATA 
 // ==========================
 const questions = [
   {
-    question: "You hear a noise. What do you do?",
+    question: "You notice someone watching you from a distance. What do you do?",
+    image: "images/woods.webp",
     answers: [
-      { text: "Run toward it", villain: "x" },
-      { text: "Hide and watch", villain: "y" },
-      { text: "Think first", villain: "z" }
+      { text: "Approach them", villain: "Jason" },
+      { text: "Watch back", villain: "Michael" },
+      { text: "Yell at them", villain: "Freddy" },
+      { text: "Intimidate them", villain: "Leatherface" }
     ]
   },
+  {
+    question: "You prefer situations where you have:",
+    image: "images/face.jpg",
+    answers: [
+      { text: "Physical control", villain: "Jason" },
+      { text: "Time and patience", villain: "Michael" },
+      { text: "Psychological edge", villain: "Freddy" },
+      { text: "A planned setup", villain: "Jigsaw" }
+    ]
+  },
+  {
+    question: "How do you handle pressure?",
+    image: "images/eyes.png",
+    answers: [
+      { text: "Push through", villain: "Jason" },
+      { text: "Stay calm", villain: "Michael" },
+      { text: "Turn it into a game", villain: "Jigsaw" },
+      { text: "Act unpredictably", villain: "Ghostface" }
+    ]
+  },
+  {
+    question: "What kind of presence do you have?",
+    image: "images/creepy.jpg",
+    answers: [
+      { text: "Overwhelming", villain: "Leatherface" },
+      { text: "Quiet", villain: "Freddy" },
+      { text: "Chaotic", villain: "Ghostface" },
+      { text: "Strategic", villain: "Jigsaw" }
+    ]
+  }
 ]
-// score tracker
+// ==========================
+// STATE
+// ==========================
 let scores = {
   Jason: 0,
   Michael: 0,
   Leatherface: 0,
   Ghostface: 0,
   Jigsaw: 0,
-  Freddy: 0
-
-
+  FreddyK: 0
 }
 
 let currentQuestion = 0
@@ -55,6 +89,9 @@ function showQuestion() {
 
   let q = questions[currentQuestion]
   questionEl.textContent = q.question
+
+  // BACKGROUND IMAGE
+  document.body.style.backgroundImage = `url(${q.image})`
 
   q.answers.forEach(answer => {
     const btn = document.createElement("button")
@@ -82,12 +119,33 @@ function showResult() {
   quizContainer.style.display = "none"
   resultContainer.style.display = "block"
 
-  if (scores.Jason > scores[winner]) winner = "Jason"
-  if (scores.Michael > scores[winner]) winner = "Michael"
-  if (scores.Leatherface > scores[winner]) winner = "Leatherface"
-  if (scores.Ghostface > scores[winner]) winner = "Ghostface"
-  if (scores.Jigsaw > scores[winner]) winner = "Jigsaw"
-  if (scores.Freddy > scores[winner]) winner = "Freddy"
+  let winner = "Jason"
+
+  for (let villain in scores) {
+    if (scores[villain] > scores[winner]) {
+      winner = villain
+    }
+  }
 
   resultTitle.textContent = "You are " + winner
+}
+
+// ==========================
+// PLAY AGAIN BUTTON
+// ==========================
+restartBtn.onclick = () => {
+  currentQuestion = 0
+
+  scores = {
+    Jason: 0,
+    Michael: 0,
+    Leatherface: 0,
+    Ghostface: 0,
+    Jigsaw: 0,
+    FreddyK: 0
+  }
+
+  resultContainer.style.display = "none"
+  quizContainer.style.display = "none"
+  startScreen.style.display = "block"
 }

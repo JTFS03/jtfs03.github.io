@@ -1,0 +1,13 @@
+body {
+  color: white;
+  margin: 0;
+}
+
+/* dark overlay so text is readable */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: darkred;
+  z-index: -1;
+}
