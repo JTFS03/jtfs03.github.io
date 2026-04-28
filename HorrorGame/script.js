@@ -82,8 +82,7 @@ function showResult() {
   quizContainer.style.display = "none"
   resultContainer.style.display = "block"
 
-  let winner = "Jason"
-
+  if (scores.Jason > scores[winner]) winner = "Jason"
   if (scores.Michael > scores[winner]) winner = "Michael"
   if (scores.Leatherface > scores[winner]) winner = "Leatherface"
   if (scores.Ghostface > scores[winner]) winner = "Ghostface"
