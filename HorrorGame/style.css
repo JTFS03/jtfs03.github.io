@@ -1,28 +1,53 @@
-/* Start screen title */
-#start-screen h1 {
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* BACKGROUND FIx */
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-color: black;
+}
+
+/* MAIN CONTAINER  */
+#quiz-container {
+  min-height: 100vh;
+  text-align: center;
+  padding-top: 40px;
+}
+
+/*  RED GLOW  */
+h1, h2 {
   color: red;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px red, 0 0 20px darkred;
 }
 
-/* Result title */
-#result-title {
+button {
+  background-color: black;
   color: red;
-  text-shadow: 0 0 10px red;
+  border: 2px solid red;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+
+  text-shadow: 0 0 5px red;
+  box-shadow: 0 0 10px red;
+
+  transition: 0.2s;
 }
 
-/* Question text */
-#question {
+/* hover glow effect */
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px red;
+}
+
+/* API RESULT TEXT (matches theme) */
+#villain-info {
+  margin-top: 15px;
   color: red;
-  text-shadow: 0 0 10px red;
-}
-
-/* Answer buttons */
-#answer-buttons button {
-  background-color: darkred;
-  color: white;
-}
-
-/* Hover effect (important) */
-#answer-buttons button:hover {
-  background-color: red;
+  text-shadow: 0 0 5px red;
 }

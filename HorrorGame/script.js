@@ -4,7 +4,7 @@
 const startBtn = document.getElementById("start-btn")
 const startScreen = document.getElementById("start-screen")
 
-const quizContainer = document.getElementById("quiz-container")
+const quizInner = document.getElementById("quiz-container-inner")
 const questionEl = document.getElementById("question")
 const answerButtons = document.getElementById("answer-buttons")
 
@@ -58,6 +58,7 @@ const questions = [
     ]
   }
 ]
+
 // ==========================
 // STATE
 // ==========================
@@ -67,7 +68,7 @@ let scores = {
   Leatherface: 0,
   Ghostface: 0,
   Jigsaw: 0,
-  FreddyK: 0
+  Freddy: 0
 }
 
 let currentQuestion = 0
@@ -77,7 +78,7 @@ let currentQuestion = 0
 // ==========================
 startBtn.onclick = () => {
   startScreen.style.display = "none"
-  quizContainer.style.display = "block"
+  quizInner.style.display = "block"
   showQuestion()
 }
 
@@ -90,8 +91,21 @@ function showQuestion() {
   let q = questions[currentQuestion]
   questionEl.textContent = q.question
 
-  // BACKGROUND IMAGE
+  // BACKGROUND
   document.body.style.backgroundImage = `url(${q.image})`
+  document.body.style.backgroundSize = "cover"
+  document.body.style.backgroundRepeat = "no-repeat"
+
+  // POSITION FIXES
+  if (q.image.includes("face.jpg")) {
+    document.body.style.backgroundPosition = "top"
+  } 
+  else if (q.image.includes("creepy.jpg")) {
+    document.body.style.backgroundPosition = "50% 30%"
+  } 
+  else {
+    document.body.style.backgroundPosition = "center"
+  }
 
   q.answers.forEach(answer => {
     const btn = document.createElement("button")
@@ -116,7 +130,7 @@ function showQuestion() {
 // SHOW RESULT
 // ==========================
 function showResult() {
-  quizContainer.style.display = "none"
+  quizInner.style.display = "none"
   resultContainer.style.display = "block"
 
   let winner = "Jason"
@@ -128,10 +142,52 @@ function showResult() {
   }
 
   resultTitle.textContent = "You are " + winner
+
+  loadVillainInfo(winner) // 🔥 API CALL
 }
 
 // ==========================
-// PLAY AGAIN BUTTON
+// API FUNCTION
+// ==========================
+async function loadVillainInfo(villain) {
+  const apiKey = "c5767079"
+
+  const movieMap = {
+    Jason: "Friday the 13th",
+    Michael: "Halloween",
+    Freddy: "A Nightmare on Elm Street",
+    Ghostface: "Scream",
+    Jigsaw: "Saw",
+    Leatherface: "The Texas Chain Saw Massacre"
+  }
+
+  const movie = movieMap[villain]
+
+  const res = await fetch(
+    `https://www.omdbapi.com/?t=${encodeURIComponent(movie)}&apikey=${apiKey}`
+  )
+
+  const data = await res.json()
+
+  const infoDiv = document.getElementById("villain-info")
+
+  if (data.Response === "False") {
+    infoDiv.innerHTML = "<p>Info not found.</p>"
+    return
+  }
+
+  infoDiv.innerHTML = `
+    <h3>${data.Title} (${data.Year})</h3>
+    <img src="${data.Poster}" style="width:200px; margin:10px 0;">
+    <p>${data.Plot}</p>
+    <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(movie)}+trailer" target="_blank">
+      Watch Trailer
+    </a>
+  `
+}
+
+// ==========================
+// RESTART
 // ==========================
 restartBtn.onclick = () => {
   currentQuestion = 0
@@ -142,10 +198,10 @@ restartBtn.onclick = () => {
     Leatherface: 0,
     Ghostface: 0,
     Jigsaw: 0,
-    FreddyK: 0
+    Freddy: 0
   }
 
   resultContainer.style.display = "none"
-  quizContainer.style.display = "none"
+  quizInner.style.display = "none"
   startScreen.style.display = "block"
 }
