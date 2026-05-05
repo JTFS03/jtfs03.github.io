@@ -14,12 +14,17 @@ const resultTitle = document.getElementById("result-title")
 const restartBtn = document.getElementById("restart-btn")
 
 // ==========================
+// API KEYS
+// ==========================
+const OMDB_KEY = "c5767079"
+const UNSPLASH_KEY = "5sliI8Jpj89Rmg9rfR0gR2eszFlAkCQIK41TN78d1DM"
+
+// ==========================
 // DATA 
 // ==========================
 const questions = [
   {
     question: "You notice someone watching you from a distance. What do you do?",
-    image: "../pics/woods.webp",
     answers: [
       { text: "Approach them", villain: "Jason" },
       { text: "Watch back", villain: "Michael" },
@@ -29,7 +34,6 @@ const questions = [
   },
   {
     question: "You prefer situations where you have:",
-    image: "../pics/face.jpg",
     answers: [
       { text: "Physical control", villain: "Jason" },
       { text: "Time and patience", villain: "Michael" },
@@ -39,7 +43,6 @@ const questions = [
   },
   {
     question: "How do you handle pressure?",
-    image: "../pics/eyes.png",
     answers: [
       { text: "Push through", villain: "Jason" },
       { text: "Stay calm", villain: "Michael" },
@@ -49,7 +52,6 @@ const questions = [
   },
   {
     question: "What kind of presence do you have?",
-    image: "../pics/creepy.jpg",
     answers: [
       { text: "Overwhelming", villain: "Leatherface" },
       { text: "Quiet", villain: "Freddy" },
@@ -83,6 +85,25 @@ startBtn.onclick = () => {
 }
 
 // ==========================
+// UNSPLASH BACKGROUND
+// ==========================
+async function loadBackground() {
+  const themes = ["horror", "dark forest", "abandoned house", "nightmare"]
+  const randomTheme = themes[Math.floor(Math.random() * themes.length)]
+
+  const res = await fetch(
+    `https://api.unsplash.com/photos/random?query=${randomTheme}&orientation=landscape&client_id=${UNSPLASH_KEY}`
+  )
+
+  const data = await res.json()
+
+  document.body.style.backgroundImage = `url(${data.urls.regular})`
+  document.body.style.backgroundSize = "cover"
+  document.body.style.backgroundRepeat = "no-repeat"
+  document.body.style.backgroundPosition = "center"
+}
+
+// ==========================
 // SHOW QUESTION
 // ==========================
 function showQuestion() {
@@ -91,21 +112,7 @@ function showQuestion() {
   let q = questions[currentQuestion]
   questionEl.textContent = q.question
 
-  // BACKGROUND
-  document.body.style.backgroundImage = `url(${q.image})`
-  document.body.style.backgroundSize = "cover"
-  document.body.style.backgroundRepeat = "no-repeat"
-
-  // POSITION FIXES
-  if (q.image.includes("face.jpg")) {
-    document.body.style.backgroundPosition = "top"
-  } 
-  else if (q.image.includes("creepy.jpg")) {
-    document.body.style.backgroundPosition = "50% 30%"
-  } 
-  else {
-    document.body.style.backgroundPosition = "center"
-  }
+  loadBackground()
 
   q.answers.forEach(answer => {
     const btn = document.createElement("button")
@@ -143,15 +150,13 @@ function showResult() {
 
   resultTitle.textContent = "You are " + winner
 
-  loadVillainInfo(winner) // 🔥 API CALL
+  loadVillainInfo(winner)
 }
 
 // ==========================
-// API FUNCTION
+// OMDB API
 // ==========================
 async function loadVillainInfo(villain) {
-  const apiKey = "c5767079"
-
   const movieMap = {
     Jason: "Friday the 13th",
     Michael: "Halloween",
@@ -164,7 +169,7 @@ async function loadVillainInfo(villain) {
   const movie = movieMap[villain]
 
   const res = await fetch(
-    `https://www.omdbapi.com/?t=${encodeURIComponent(movie)}&apikey=${apiKey}`
+    `https://www.omdbapi.com/?t=${encodeURIComponent(movie)}&apikey=${OMDB_KEY}`
   )
 
   const data = await res.json()
@@ -178,11 +183,13 @@ async function loadVillainInfo(villain) {
 
   infoDiv.innerHTML = `
     <h3>${data.Title} (${data.Year})</h3>
-    <img src="${data.Poster}" style="width:200px; margin:10px 0;">
+    <img src="${data.Poster}" style="width:200px;">
     <p>${data.Plot}</p>
-    <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(movie)}+trailer" target="_blank">
-      Watch Trailer
-    </a>
+
+    <iframe width="300" height="170"
+    src="https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(movie + " trailer")}"
+    frameborder="0" allowfullscreen>
+    </iframe>
   `
 }
 
