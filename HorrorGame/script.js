@@ -76,11 +76,39 @@ let scores = {
 let currentQuestion = 0
 
 // ==========================
+// SOUND FUNCTION
+// ==========================
+function startRandomSounds() {
+  const sounds = [
+    document.getElementById("s1"),
+    document.getElementById("s2"),
+    document.getElementById("s3")
+  ]
+
+  setInterval(() => {
+    const random = sounds[Math.floor(Math.random() * sounds.length)]
+
+    random.currentTime = 0
+    random.volume = 0.3
+    random.play()
+
+  }, 6500)
+}
+
+// ==========================
 // START QUIZ
 // ==========================
 startBtn.onclick = () => {
   startScreen.style.display = "none"
   quizInner.style.display = "block"
+
+  const startSound = document.getElementById("start-sound")
+  startSound.volume = 0.7
+  startSound.currentTime = 0
+  startSound.play()
+
+  startRandomSounds()
+
   showQuestion()
 }
 
