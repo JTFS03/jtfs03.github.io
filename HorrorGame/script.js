@@ -78,6 +78,8 @@ let currentQuestion = 0
 // ==========================
 // SOUND FUNCTION
 // ==========================
+let lastSound = null
+
 function startRandomSounds() {
   const sounds = [
     document.getElementById("s1"),
@@ -86,13 +88,22 @@ function startRandomSounds() {
   ]
 
   setInterval(() => {
-    const random = sounds[Math.floor(Math.random() * sounds.length)]
+    let random
+
+    do {
+      random = sounds[Math.floor(Math.random() * sounds.length)]
+    } while (random === lastSound)
+
+    lastSound = random
+
+    sounds.forEach(s => s.pause())
 
     random.currentTime = 0
     random.volume = 0.3
-    random.play()
 
-  }, 6500)
+    random.play().catch(() => {})
+
+  }, 3000)
 }
 
 // ==========================
@@ -105,7 +116,7 @@ startBtn.onclick = () => {
   const startSound = document.getElementById("start-sound")
   startSound.volume = 0.7
   startSound.currentTime = 0
-  startSound.play()
+  startSound.play().catch(() => {})
 
   startRandomSounds()
 
@@ -174,6 +185,13 @@ function showResult() {
     if (scores[villain] > scores[winner]) {
       winner = villain
     }
+  }
+
+  // 15% chance to change result
+  if (Math.random() < 0.15) {
+    const villains = Object.keys(scores).filter(v => v !== winner)
+    const randomPick = villains[Math.floor(Math.random() * villains.length)]
+    winner = randomPick
   }
 
   resultTitle.textContent = "You are " + winner
